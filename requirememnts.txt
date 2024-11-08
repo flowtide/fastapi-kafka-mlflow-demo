@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+minio
+python-dotenv
+requests
+librosa
+matplotlib
+mlflow
+boto3
+torch
+torchvision
+torchaudio
+opencv-python
+pydantic
+confluent-kafka

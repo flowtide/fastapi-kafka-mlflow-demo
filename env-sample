@@ -1,0 +1,14 @@
+MINIO_ENDPOINT=gnew-office.tplinkdns.com:27010
+MINIO_ACCESS_KEY=minioadmin
+MINIO_SECRET_KEY=minioadmin
+MINIO_BUCKET_NAME=cusmos-preprocessing
+
+MLFLOW_S3_ENDPOINT_URL=http://192.168.0.232:27440
+MLFLOW_TRACKING_URI=http://192.168.0.232:27442
+
+WS_ACCESS_KEY_ID=minio
+AWS_SECRET_ACCESS_KEY=miniostorage
+
+KAFKA_ADDR=localhost:9092
+KAFKA_TOPIC=test-topic
+
