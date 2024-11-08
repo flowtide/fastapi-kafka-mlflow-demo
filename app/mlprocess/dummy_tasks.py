@@ -20,7 +20,7 @@ def send_step_msg(producer: Producer, topic: str, step: str, modelId: str, text:
         "expName": exp_name,
     }
     if run_id:
-        message[run_id] = run_id
+        message["run_id"] = run_id
     try:
         producer.produce(topic, value=json.dumps(message))
         producer.flush()
@@ -80,11 +80,27 @@ def dummy_train_model(
             logger.info(text)
             send_step_msg(producer, topic, "train", model_id, text, exp_name, run_id)
 
+    try:
         # Simulate saving the model
         simulated_model_path = "README.md"
-        mlflow.log_artifact(simulated_model_path)  # Simulate logging an artifact
+        full_path = os.path.join(os.getcwd(), simulated_model_path)
+
+        if not os.path.exists(full_path):
+            raise FileNotFoundError(f"File not found: {full_path}")
+
+        mlflow.log_artifact(full_path)  # Simulate logging an artifact
         print(f"Simulation complete for Run ID: {run_id}")
-        text = f"Simulated model saved at {simulated_model_path}"
+        text = f"Simulated model saved at {full_path}"
         send_step_msg(producer, topic, "end", model_id, text, exp_name, run_id)
 
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        # Optionally send an error message or perform alternative actions
+        text = f"Simulation failed: {e}"
+        send_step_msg(producer, topic, "error", model_id, text, exp_name, run_id)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        text = f"Unexpected error: {e}"
+        send_step_msg(producer, topic, "error", model_id, text, exp_name, run_id)
+    
         return run_id

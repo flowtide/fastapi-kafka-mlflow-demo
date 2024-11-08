@@ -9,6 +9,11 @@ nc -zv localhost 9092
 [kafka reference](https://hub.docker.com/r/apache/kafka)
 
 ## Run fastapi app
+- Setup .env and edit it
+```
+cp env-sample .env
+```
+- Run
 ```
 python app/main.py
 ```
@@ -33,4 +38,6 @@ curl -X POST "http://localhost:28000/api/v1/model/AAA/train" -H "Content-Type: a
       }
     ]
   }
+}'
 ```
+
