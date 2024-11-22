@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+resources
+backup/
+.env
+docker-compose/mlflow/minio-data/
