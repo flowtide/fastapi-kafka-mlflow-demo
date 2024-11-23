@@ -1,10 +1,13 @@
-# Create mlflow user:
-# psql -h localhost -p 15432 -U postgres
-# CREATE DATABASE mlflowdatabase;
-# CREATE USER mlflowuser WITH PASSWORD 'mlflowpassword';
-# GRANT ALL PRIVILEGES ON DATABASE mlflowdatabase TO mlflowuser;
-# \c mlflowdatabase
-# GRANT ALL ON SCHEMA public TO mlflowuser;
+## Create mlflow user:
+# docker exec -it postgres bash
+# psql -U postgres
+# CREATE DATABASE mlflow_01;
+# CREATE USER mlflow_user WITH PASSWORD 'c3fdn1fg';
+# GRANT ALL PRIVILEGES ON DATABASE mlflow_01 TO mlflow_user;
+# \c mlflow_01
+# GRANT ALL ON SCHEMA public TO mlflow_user;
+# \dn+ public
+## check "mlflow_user=UC/pg_database_owner" permission
 
 version: '3.1'
 services:
@@ -13,16 +16,10 @@ services:
     container_name: postgres
     restart: always
     ports:
-        - "15432:5432"
+        - "27443:5432"
     environment:
         POSTGRES_PASSWORD: postgres
         TZ: Asia/Seoul
         POSTGRES_INITDB_ARGS: '--encoding=utf8 --locale=ko_KR.UTF-8 --lc-collate=ko_KR.UTF-8 --lc-ctype=ko_KR.UTF-8'
     volumes:
         - ./postgres-root/data:/var/lib/postgresql/data
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 18080:8080

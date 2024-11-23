@@ -47,6 +47,6 @@ services:
         mc alias set mlflowminio http://mlflow-artifact-store:9000 minio miniostorage &&
         mc mb --ignore-existing mlflowminio/mlflow &&
         mlflow server \
-        --backend-store-uri postgresql://mlflowuser:mlflowpassword@localhost:15432/mlflowdatabase \
+        --backend-store-uri postgresql://mlflow_user:c3fdn1fg@localhost:27443/mlflow_01 \
         --default-artifact-root s3://mlflow/ \
         --host 0.0.0.0
